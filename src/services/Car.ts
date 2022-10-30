@@ -26,6 +26,7 @@ class CarService implements IService<ICar> {
 
   public async readOne(_id:string):Promise<ICar> {
     const car = await this._car.readOne(_id);
+    if (_id.length !== 24) throw new Error(ErrorTypes.InvalidMongoId);
     if (!car) throw new Error(ErrorTypes.EntityNotFound);
     return car;
   }
