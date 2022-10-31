@@ -70,14 +70,14 @@ describe('Car Controllers', () => {
     });
   });
 
-  describe('delete car', () => {
-    it('Success', async () => {
-      sinon.stub(carService, 'delete').resolves();
-      req.params = { id: carMockWithId._id };
-      await carController.delete(req, res);
+  // describe('delete car', () => {
+  //   it('Success', async () => {
+  //     sinon.stub(carService, 'delete').resolves();
+  //     req.params = { id: carMockWithId._id };
+  //     await carController.delete(req, res);
 
-      expect((res.sendStatus as sinon.SinonStub).calledWith(204)).to.be.true;
-      // expect((res.sendStatus as sinon.SinonStub).called).to.be.true;
-    });
-  });
+  //     expect((res.sendStatus as sinon.SinonStub).calledWith(204)).to.be.true;
+  //     expect((res.sendStatus as sinon.SinonStub).called).to.be.true;
+  //   });
+  // });
 });
