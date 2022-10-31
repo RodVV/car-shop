@@ -63,7 +63,15 @@ describe('Car Models', () => {
       expect(deuErro).not.to.be.undefined;
       expect((deuErro as Error).message).to.be.equal('InvalidMongoId');
       stub.restore();
-    })
-  })
+    });
+  });
+
+	describe('delete car', () => {
+    it('successfully deleted', async () => {
+			sinon.stub(carModel, 'delete').resolves(carMockWithId);
+			const deleted = await carModel.delete(carMockWithId._id)
+      expect(deleted).to.be.deep.equal(carMockWithId);
+		});
+  });
 
 });
