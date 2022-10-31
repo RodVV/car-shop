@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
+import { ZodError } from 'zod';
 import mongoose from 'mongoose';
 import Car from '../../../models/Car'
 import { carMock, carMockWithId, carMockArrayWithId } from '../../mocks/carMock';
@@ -47,4 +48,35 @@ describe('Car Services', () => {
       expect(error?.error).to.be.deep.equal(ErrorTypes.EntityNotFound);        
 		});
 	});
+
+  describe('Update car', () => {
+		it('successfully updated', async () => {
+			sinon.stub(carModel, 'update').resolves(carMockWithId);
+
+			const updated = await carService.update('any-id', carMock);
+			expect(updated).to.be.deep.eq(carMockWithId);
+			sinon.restore();
+		})
+
+		it('Failed to update - Zod', async () => {
+			let error;
+			try {
+				await carService.update('any-id', {});				
+			} catch (err) {
+				error = err;
+			}
+			expect(error).to.be.instanceOf(ZodError);
+		})
+
+		it('Failed to update - car not found', async () => {
+			sinon.stub(carModel, 'update').resolves(null);
+			let error: any;
+			try {
+				await carService.update('any-id', carMock);				
+			} catch (err) {
+				error = err;
+			}
+			expect(error?.message).to.be.eq(ErrorTypes.EntityNotFound);
+		})
+	})
 });
