@@ -44,4 +44,26 @@ describe('Car Models', () => {
 		});
 	});
 
+	describe('update car', () => {
+    it('successfully updated', async () => {
+      const stub = sinon.stub(carModel, 'update').resolves(carMockWithId);
+			const updated = await carModel.update(carMockWithId._id, carMock)
+      expect(updated).to.be.deep.equal(carMockWithId);
+      stub.restore();
+		});
+
+    it('throws InvalidMongoId with invalid id', async () => {
+      const stub = sinon.stub(mongoose, 'isValidObjectId').returns(false);
+      let deuErro;
+      try {
+        await carModel.update('invalid-id', carMock)        
+      } catch (error: any) {
+        deuErro = error;
+      }
+      expect(deuErro).not.to.be.undefined;
+      expect((deuErro as Error).message).to.be.equal('InvalidMongoId');
+      stub.restore();
+    })
+  })
+
 });
