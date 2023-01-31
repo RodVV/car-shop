@@ -64,9 +64,9 @@ Passos do projeto:
 
  05 - Rota para o endpoint `/cars` onde seja possível listar todos os carros registrados
 
- 09 - Rota para o endpoint `/cars/id` onde seja possível listar um único carro através do seu id
+ 06 - Rota para o endpoint `/cars/id` onde seja possível listar um único carro através do seu id
 
- 13 - Rota para o endpoint `/cars/id`, onde é possível atualizar o registro de um carro através do seu id
+ 07 - Rota para o endpoint `/cars/id`, onde é possível atualizar o registro de um carro através do seu id
 
- 17 - Rota para o endpoint `/cars/id` para excluir os registros de um carro
+ 08 - Rota para o endpoint `/cars/id` para excluir os registros de um carro
 
